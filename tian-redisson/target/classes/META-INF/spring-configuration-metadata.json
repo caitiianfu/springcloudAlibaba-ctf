@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "redisson",
+      "type": "com.unicom.redisson.config.RedissonConfig",
+      "sourceType": "com.unicom.redisson.config.RedissonConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "redisson.host",
+      "type": "java.lang.String",
+      "sourceType": "com.unicom.redisson.config.RedissonConfig"
+    },
+    {
+      "name": "redisson.password",
+      "type": "java.lang.String",
+      "sourceType": "com.unicom.redisson.config.RedissonConfig"
+    }
+  ],
+  "hints": []
+}

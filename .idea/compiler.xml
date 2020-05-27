@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="tian-gen" />
+        <module name="tian-mongo" />
+        <module name="tian-common" />
+        <module name="tian-redisson" />
+        <module name="tian-gateway" />
+        <module name="tian-security" />
+        <module name="tian-rabbitMQ" />
+        <module name="tian-search" />
+        <module name="tian-mbg" />
+        <module name="tian-admin" />
+        <module name="tian-redis" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="tian" options="-parameters" />
+      <module name="tian-admin" options="-parameters" />
+      <module name="tian-common" options="-parameters" />
+      <module name="tian-gateway" options="-parameters" />
+      <module name="tian-gen" options="-parameters" />
+      <module name="tian-mbg" options="-parameters" />
+      <module name="tian-mongo" options="-parameters" />
+      <module name="tian-rabbitMQ" options="-parameters" />
+      <module name="tian-redis" options="-parameters" />
+      <module name="tian-redisson" options="-parameters" />
+      <module name="tian-search" options="-parameters" />
+      <module name="tian-security" options="-parameters" />
+    </option>
+  </component>
+</project>

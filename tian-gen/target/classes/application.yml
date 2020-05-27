@@ -1,0 +1,125 @@
+# 项目相关配置
+ruoyi:
+  # 名称
+  name: RuoYi
+  # 版本
+  version: 3.3.0
+  # 版权年份
+  copyrightYear: 2019
+  # 文件路径
+  profile: D:/profile/
+  # 获取ip地址开关
+  addressEnabled: true
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为80
+  port: 80
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+ 
+# 日志配置
+logging:
+  level:
+    com.unicom: debug
+    org.springframework: warn
+
+# 用户配置
+user:
+  password:
+    # 密码错误{maxRetryCount}次锁定10分钟
+    maxRetryCount: 5
+
+# Spring配置
+spring:
+  # 模板引擎
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: static/i18n/messages
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles: 
+    active: druid
+  # 文件上传
+  servlet:
+     multipart:
+       # 单个文件大小
+       max-file-size:  10MB
+       # 设置总上传的文件大小
+       max-request-size:  20MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+
+# MyBatis
+#mybatis:
+    # 搜索指定包别名
+#    typeAliasesPackage: com.ruoyi.project
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+#    mapperLocations: classpath:mybatis/**/*Mapper.xml
+    # 加载全局的配置文件
+#    configLocation: classpath:mybatis/mybatis-config.xml
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mybatis/**/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.unicom
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_EMPTY
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      #logic-delete-value: 0
+      #logic-not-delete-value: 1
+      #表名前缀
+      table-prefix: tb_
+      db-type: mysql
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+# PageHelper分页插件
+pagehelper: 
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql 
+
+
+
+# 代码生成
+gen: 
+  # 作者
+  author: ruoyi
+  # 默认生成包路径 module 需改成自己的模块名称 如 system monitor tool
+  packageName: com.unicom.gen.platform
+  # 自动去除表前缀，默认是true
+  autoRemovePre: true
+  # 表前缀(类名不会包含表前缀)
+  tablePrefix: tb_

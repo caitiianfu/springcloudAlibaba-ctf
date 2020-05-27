@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: tian-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8899
+      config:
+        server-addr: localhost:8899
+        file-extension: yaml

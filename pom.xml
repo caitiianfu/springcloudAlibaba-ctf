@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.unicom</groupId>
+    <artifactId>tian</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+
+        <module>tian-common</module>
+        <module>tian-gateway</module>
+        <module>tian-security</module>
+        <module>tian-gen</module>
+        <module>tian-admin</module>
+        <module>tian-mbg</module>
+        <module>tian-search</module>
+        <module>tian-mongo</module>
+        <module>tian-redis</module>
+        <module>tian-redisson</module>
+        <module>tian-rabbitMQ</module>
+    </modules>
+
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <skipTests>true</skipTests>
+<!--
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+-->
+
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
+        <pagehelper-starter.version>1.2.10</pagehelper-starter.version>
+        <pagehelper.version>5.1.8</pagehelper.version>
+        <druid.version>1.1.10</druid.version>
+        <hutool.version>4.5.7</hutool.version>
+        <swagger2.version>2.7.0</swagger2.version>
+        <mybatis-generator.version>1.3.7</mybatis-generator.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <mysql-connector.version>8.0.13</mysql-connector.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <spring-data-commons.version>2.1.5.RELEASE</spring-data-commons.version>
+        <tian-common.version>1.0-SNAPSHOT</tian-common.version>
+        <tian-mbg.version>1.0-SNAPSHOT</tian-mbg.version>
+        <tian-security.version>1.0-SNAPSHOT</tian-security.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+    <dependencies>
+    <!--Spring Cloud 相关依赖-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+        <!--集成阿里巴巴依赖-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.unicom</groupId>
+            <artifactId>tian-common</artifactId>
+            <version>${tian-common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.unicom</groupId>
+            <artifactId>tian-security</artifactId>
+            <version>${tian-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.unicom</groupId>
+            <artifactId>tian-mbg</artifactId>
+            <version>${tian-mbg.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <!--集成druid连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <!--Hutool Java工具包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!--Swagger-UI API文档生产工具-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+
+        <!--Mysql数据库驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector.version}</version>
+        </dependency>
+
+        <!--JWT(Json Web Token)登录支持-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <!--集成SpringBoot Admin监控-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>${admin-starter-server.version}</version>
+        </dependency>
+    </dependencies>
+    </dependencyManagement>
+
+</project>

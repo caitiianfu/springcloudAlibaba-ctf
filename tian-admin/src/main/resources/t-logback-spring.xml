@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+
+
+	<appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>
+					<!--
+					[${APP_NAME}:${ServerIP}:${ServerPort}] [%clr(%X{traceId}){yellow},%clr(%X{X-B3-TraceId}){yellow}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%level){blue} %clr(${PID}){magenta} %clr([%thread]){orange} %clr(%logger){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+					-->
+					%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{requestId}] %-5level %logger{50} - %msg%n
+				</pattern>
+			</layout>
+		</appender>
+		
+<!-- 		info按天生成日志#start -->	
+	<appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<!--是error级别则忽略-->
+ 			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+				<level>INFO</level>
+				<onMatch>ACCEPT</onMatch>
+				<onMismatch>DENY</onMismatch>
+			</filter>
+			 <!--日志文件输出格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{requestId}] %-5level [%logger{50}] - %msg%n</pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+			<!--滚动策略-->
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!-- 路径-->
+ 				<fileNamePattern>G:/wx/info.%d.log</fileNamePattern>
+			</rollingPolicy>
+		</appender>
+		<!-- info按天生成日志#end -->
+ 
+		<!-- error按天生成日志#start -->
+ 		<appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>ERROR</level>
+			</filter>
+			<encoder>
+				<!--日志文件输出格式-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{requestId}] %-5level [%logger{50}] - %msg%n</pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+			</encoder>
+				<!--滚动策略-->
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!--路径-->
+				<fileNamePattern>G:/wx/error.%d.log</fileNamePattern>
+			</rollingPolicy>
+		</appender>
+			<!-- 		error按天生成日志#end-->		
+		<root level="info">
+			<appender-ref ref="consoleLog"/>
+			<appender-ref ref="fileInfoLog"/>
+			<appender-ref ref="fileErrorLog"/>
+		</root>
+	
+		
+</configuration>
