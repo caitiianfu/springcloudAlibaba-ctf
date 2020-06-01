@@ -26,7 +26,17 @@ spring:
   application:
     name: tian-rabbitMQ
   mail:
-    host:
+    host: smtp.qq.com
+    password: qlakbyjekjulfhhd
+    username: 1075079197@qq.com
+    from: 1075079197@qq.com
+    properties:
+             mail:
+              smtp:
+                auth: true
+                starttls:
+                  enable: true
+                  required: true
   rabbitmq:
     host: localhost
     port: 5672

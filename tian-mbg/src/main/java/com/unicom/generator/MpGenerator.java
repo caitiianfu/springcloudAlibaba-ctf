@@ -30,7 +30,7 @@ public class MpGenerator {
         GlobalConfig gc = new GlobalConfig();
         gc.setAuthor("ctf");
         gc.setOutputDir("D:/idea/workspace/tian/tian-mbg/src/main/java");
-        gc.setFileOverride(true);// 是否覆盖同名文件，默认是false
+        //gc.setFileOverride(true);// 是否覆盖同名文件，默认是false
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap

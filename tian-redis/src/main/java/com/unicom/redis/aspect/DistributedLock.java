@@ -1,9 +1,10 @@
-package com.unicom.redis.Aspect;
+package com.unicom.redis.aspect;
 
 import com.unicom.common.exception.Assert;
 import com.unicom.redis.annotation.RedisLock;
 import com.unicom.redis.config.RedisService;
 import com.unicom.redis.prefix.TestPrefix;
+import com.unicom.redis.util.SpelUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -26,7 +27,7 @@ import java.util.UUID;
 @Component
 @Aspect
 @Slf4j
-public class DistributedLock {
+public class DistributedLock extends SpelUtils {
     @Resource
     private RedisService redisService;
     private String key;
@@ -40,8 +41,12 @@ public class DistributedLock {
         RedisLock redisLock = method.getAnnotation(RedisLock.class);
         key = redisLock.key();
         value = redisLock.value();
-        if (value == null || value.length() == 0) {
-            value = UUID.randomUUID().toString();
+        if (value.contains("#")){
+            value=generateKeyBySpEL(value,joinPoint);
+        }else {
+            if (value == null || value.length() == 0) {
+                value = UUID.randomUUID().toString();
+            }
         }
         boolean result = redisService.distributedLock(TestPrefix.testPrefix, key, value);
         if (result) {

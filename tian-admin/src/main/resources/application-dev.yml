@@ -12,6 +12,15 @@ server:
     #是否分配的直接内存(NIO直接分配的堆外内存)
     direct-buffers: true
 
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  timeout: 3
+  password: 12345
+  poolMaxTotal: 10
+  poolMaxIdle: 10
+  poolMaxWait: 3
 #tomcat:
 #  remote-ip-header: x-forward-for
 #  uri-encoding: UTF-8

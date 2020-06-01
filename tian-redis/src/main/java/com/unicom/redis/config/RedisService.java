@@ -1,6 +1,8 @@
 package com.unicom.redis.config;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.unicom.redis.annotation.CacheException;
 import com.unicom.redis.prefix.KeyPrefix;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -47,7 +50,8 @@ public class RedisService {
                 jedis.setex(realKey,expireSeconds,str);
             }
             return true;
-        }finally {
+        }
+        finally {
             closeRedis(jedis);
         }
     }
@@ -103,7 +107,8 @@ public class RedisService {
             String value=jedis.get(realKey);
             T v=stringToBean(value,clazz);
             return  v;
-        }finally {
+        }
+        finally {
             closeRedis(jedis);
         }
 
@@ -124,6 +129,19 @@ public class RedisService {
         }finally {
             closeRedis(jedis);
         }
+    }
+    public <T> List<T> getList(KeyPrefix keyPrefix,String key,Class<T> clazz){
+        Jedis jedis=null;
+        try {
+            jedis=jedisPool.getResource();
+            String realKey=keyPrefix.getPrefix()+key;
+            String value=jedis.get(realKey);
+            if (value==null) return null;
+            return  (List<T>) JSONArray.parseArray(value,clazz);
+        }finally {
+            closeRedis(jedis);
+        }
+
     }
 
     /**

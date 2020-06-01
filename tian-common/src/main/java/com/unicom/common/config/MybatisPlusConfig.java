@@ -6,7 +6,7 @@
 * @date 2019年1月28日
 * @version 1.0
 */
-package com.unicom.admin.config;
+package com.unicom.common.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;

@@ -10,6 +10,7 @@ import com.unicom.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,6 +30,7 @@ public class TianSecurityConfig extends SecurityConfig {
     @Autowired
     private IUmsResourceService iUmsResourceService;
     @Bean
+    @Order
     public UserDetailsService userDetailsService(){
         //获得登录信息  两种方法等价
         return new UserDetailsService() {

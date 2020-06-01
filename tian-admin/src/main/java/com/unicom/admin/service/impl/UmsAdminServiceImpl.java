@@ -10,6 +10,9 @@ import com.unicom.generator.entity.UmsAdmin;
 import com.unicom.generator.entity.UmsResource;
 import com.unicom.generator.mapper.UmsAdminMapper;
 import com.unicom.generator.mapper.UmsResourceMapper;
+import com.unicom.redis.annotation.CacheException;
+import com.unicom.redis.config.RedisService;
+import com.unicom.redis.prefix.UserAdminPrefix;
 import com.unicom.security.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,25 +48,36 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private RedisService redisService;
     @Override
     public UmsAdmin getAdminByUsername(String username) {
+        UmsAdmin umsAdmin=redisService.get(UserAdminPrefix.userAdminUsr,username+":detail",UmsAdmin.class);
+        if (umsAdmin!=null){return umsAdmin;}
         QueryWrapper<UmsAdmin> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("username",username);
         List<UmsAdmin> adminList=umsAdminMapper.selectList(queryWrapper);
         if (adminList!=null&&adminList.size()>0){
-            return  adminList.get(0);
+            UmsAdmin admin=adminList.get(0);
+            redisService.set(UserAdminPrefix.userAdminUsr,admin.getUsername()+":detail",admin);
+            return  admin;
         }
         return null;
     }
-
     @Override
     public UserDetails loadUserByUsername(String username) {
        //获取用户信息
+
         UmsAdmin umsAdmin=getAdminByUsername(username);
        if (umsAdmin!=null){
+           List<UmsResource> resourceList=redisService.getList(UserAdminPrefix.userAdminResource,username+":resource",UmsResource.class);
+           if (resourceList!=null&&resourceList.size()!=0) {
+               return new AdminUserDetails(umsAdmin,resourceList);
+           }
            //获取资源信息
            List<UmsResource> resources=iUmsResourceService.getResourceList(umsAdmin.getId());
-            return new AdminUserDetails(umsAdmin,resources);
+           redisService.set(UserAdminPrefix.userAdminResource,username+":resource",resources);
+           return new AdminUserDetails(umsAdmin,resources);
        }
        //该异常会在EntryPoint进行返回
        throw  new UsernameNotFoundException("用户名"+username+"不存在");
@@ -72,7 +86,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     @Override
     public String login(String username, String password) {
         String token=null;
-        /*try {*/
+
             UserDetails userDetails = loadUserByUsername(username);
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("密码错误");
@@ -80,9 +94,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             token = jwtTokenUtil.generateToken(userDetails);
-       /* }catch (AuthenticationException e){
-            log.warn("登录异常 {}",e.getMessage());
-        }*/
+
         return token;
     }
 
@@ -95,8 +107,6 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
             try {
                 clazz.getDeclaredField(s);
             } catch (NoSuchFieldException e) {
-               // e.printStackTrace();
-                System.out.println("cccw");
 
                 Assert.fail("传参错误");
 
@@ -114,8 +124,6 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
             try {
                 clazz.getDeclaredField(s);
             } catch (NoSuchFieldException e) {
-                //e.printStackTrace();
-                System.out.println("cccw");
                 Assert.fail("传参错误");
             }
         }

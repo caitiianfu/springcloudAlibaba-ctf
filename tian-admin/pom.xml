@@ -22,6 +22,12 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>-->
         <dependency>
+            <groupId>com.unicom</groupId>
+            <artifactId>tian-redis</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>1.9.6</version>
