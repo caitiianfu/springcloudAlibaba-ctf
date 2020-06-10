@@ -2,22 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unicom.generator.mapper.MsgLogMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.unicom.generator.entity.MsgLog">
-        <id column="msg_id" property="msgId" />
-        <result column="msg" property="msg" />
-        <result column="exchange" property="exchange" />
-        <result column="routing_key" property="routingKey" />
-        <result column="status" property="status" />
-        <result column="try_count" property="tryCount" />
-        <result column="next_try_time" property="nextTryTime" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-    </resultMap>
+  <!-- 通用查询映射结果 -->
+  <resultMap id="BaseResultMap" type="com.unicom.generator.entity.MsgLog">
+    <id column="msg_id" property="msgId"/>
+    <result column="msg" property="msg"/>
+    <result column="exchange" property="exchange"/>
+    <result column="routing_key" property="routingKey"/>
+    <result column="status" property="status"/>
+    <result column="try_count" property="tryCount"/>
+    <result column="next_try_time" property="nextTryTime"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
+  <!-- 通用查询结果列 -->
+  <sql id="Base_Column_List">
         msg_id, msg, exchange, routing_key, status, try_count, next_try_time, create_time, update_time
     </sql>
 
+  <select id="testSelect" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from msg_log
+
+  </select>
 </mapper>

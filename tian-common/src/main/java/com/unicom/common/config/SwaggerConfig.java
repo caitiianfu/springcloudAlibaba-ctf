@@ -14,24 +14,23 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.unicom"))
-                .paths(PathSelectors.any())
-                .build();
-    }
+  @Bean
+  public Docket createRestApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.unicom"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("tian-微服务")
-                .description("tian-springcloud")
-                .termsOfServiceUrl("http://localhost:3334/swagger-ui.html")
-                //.contact(contact)
-                .version("1.0")
-                .build();
-    }
-
+  private ApiInfo apiInfo() {
+    return new ApiInfoBuilder()
+        .title("tian-微服务")
+        .description("tian-springcloud")
+        .termsOfServiceUrl("http://localhost:3334/swagger-ui.html")
+        // .contact(contact)
+        .version("1.0")
+        .build();
+  }
 }

@@ -1,132 +1,160 @@
 package com.unicom.generator.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+import com.unicom.common.pojo.DataScope;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
- * <p>
  * 消息投递日志
- * </p>
  *
  * @author ctf
  * @since 2020-05-27
  */
-@ApiModel(value="MsgLog对象", description="消息投递日志")
+@ApiModel(value = "MsgLog对象", description = "消息投递日志")
 public class MsgLog extends Model<MsgLog> {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "消息唯一标识")
-    private String msgId;
+  @ApiModelProperty(value = "消息唯一标识")
+  private String msgId;
 
-    @ApiModelProperty(value = "消息体, json格式化")
-    private String msg;
+  @ApiModelProperty(value = "消息体, json格式化")
+  private String msg;
 
-    @ApiModelProperty(value = "交换机")
-    private String exchange;
+  @ApiModelProperty(value = "交换机")
+  private String exchange;
 
-    @ApiModelProperty(value = "路由键")
-    private String routingKey;
+  @ApiModelProperty(value = "路由键")
+  private String routingKey;
 
-    @ApiModelProperty(value = "状态: 0投递中 1投递成功 2投递失败 3已消费")
-    private Integer status;
+  @ApiModelProperty(value = "状态: 0投递中 1投递成功 2投递失败 3已消费")
+  private Integer status;
 
-    @ApiModelProperty(value = "重试次数")
-    private Integer tryCount;
+  @ApiModelProperty(value = "重试次数")
+  private Integer tryCount;
 
-    @ApiModelProperty(value = "下一次重试时间")
-    private LocalDateTime nextTryTime;
+  @ApiModelProperty(value = "下一次重试时间")
+  private LocalDateTime nextTryTime;
 
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+  @ApiModelProperty(value = "创建时间")
+  private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
+  @ApiModelProperty(value = "更新时间")
+  private LocalDateTime updateTime;
 
-    public String getMsgId() {
-        return msgId;
-    }
+  @TableField(exist = false)
+  private DataScope dataScope = new DataScope();
 
-    public void setMsgId(String msgId) {
-        this.msgId = msgId;
-    }
-    public String getMsg() {
-        return msg;
-    }
+  public DataScope getDataScope() {
+    return dataScope;
+  }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-    public String getExchange() {
-        return exchange;
-    }
+  public void setDataScope(DataScope dataScope) {
+    this.dataScope = dataScope;
+  }
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
-    public String getRoutingKey() {
-        return routingKey;
-    }
+  public String getMsgId() {
+    return msgId;
+  }
 
-    public void setRoutingKey(String routingKey) {
-        this.routingKey = routingKey;
-    }
-    public Integer getStatus() {
-        return status;
-    }
+  public void setMsgId(String msgId) {
+    this.msgId = msgId;
+  }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-    public Integer getTryCount() {
-        return tryCount;
-    }
+  public String getMsg() {
+    return msg;
+  }
 
-    public void setTryCount(Integer tryCount) {
-        this.tryCount = tryCount;
-    }
-    public LocalDateTime getNextTryTime() {
-        return nextTryTime;
-    }
+  public void setMsg(String msg) {
+    this.msg = msg;
+  }
 
-    public void setNextTryTime(LocalDateTime nextTryTime) {
-        this.nextTryTime = nextTryTime;
-    }
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
+  public String getExchange() {
+    return exchange;
+  }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
+  public void setExchange(String exchange) {
+    this.exchange = exchange;
+  }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
+  public String getRoutingKey() {
+    return routingKey;
+  }
 
-    @Override
-    protected Serializable pkVal() {
-        return this.msgId;
-    }
+  public void setRoutingKey(String routingKey) {
+    this.routingKey = routingKey;
+  }
 
-    @Override
-    public String toString() {
-        return "MsgLog{" +
-        "msgId=" + msgId +
-        ", msg=" + msg +
-        ", exchange=" + exchange +
-        ", routingKey=" + routingKey +
-        ", status=" + status +
-        ", tryCount=" + tryCount +
-        ", nextTryTime=" + nextTryTime +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
-    }
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
+  }
+
+  public Integer getTryCount() {
+    return tryCount;
+  }
+
+  public void setTryCount(Integer tryCount) {
+    this.tryCount = tryCount;
+  }
+
+  public LocalDateTime getNextTryTime() {
+    return nextTryTime;
+  }
+
+  public void setNextTryTime(LocalDateTime nextTryTime) {
+    this.nextTryTime = nextTryTime;
+  }
+
+  public LocalDateTime getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(LocalDateTime createTime) {
+    this.createTime = createTime;
+  }
+
+  public LocalDateTime getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(LocalDateTime updateTime) {
+    this.updateTime = updateTime;
+  }
+
+  @Override
+  protected Serializable pkVal() {
+    return this.msgId;
+  }
+
+  @Override
+  public String toString() {
+    return "MsgLog{"
+        + "msgId="
+        + msgId
+        + ", msg="
+        + msg
+        + ", exchange="
+        + exchange
+        + ", routingKey="
+        + routingKey
+        + ", status="
+        + status
+        + ", tryCount="
+        + tryCount
+        + ", nextTryTime="
+        + nextTryTime
+        + ", createTime="
+        + createTime
+        + ", updateTime="
+        + updateTime
+        + "}";
+  }
 }

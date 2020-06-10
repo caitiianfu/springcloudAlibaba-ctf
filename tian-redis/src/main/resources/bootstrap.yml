@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: tian-search
+    name: tian-redis
   cloud:
     nacos:
       discovery:

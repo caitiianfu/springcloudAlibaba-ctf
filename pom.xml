@@ -22,6 +22,10 @@
         <module>tian-redis</module>
         <module>tian-redisson</module>
         <module>tian-rabbitMQ</module>
+        <module>tian-activiti</module>
+        <module>tian-netty</module>
+      <module>tian-oauth2-redis</module>
+      <module>tian-redistemplate</module>
     </modules>
 
 
