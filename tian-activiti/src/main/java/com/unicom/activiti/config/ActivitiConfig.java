@@ -1,19 +1,15 @@
 package com.unicom.activiti.config;
 
 /** @author by ctf @Classsname ActivitiConfig @Description TODO @Date 2020/6/2 19:14 */
+import javax.sql.DataSource;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
-
-@Configuration
+// @Configuration
 public class ActivitiConfig {
-
   @Autowired private DataSource dataSource;
   @Autowired private PlatformTransactionManager transactionManager;
 
@@ -22,8 +18,9 @@ public class ActivitiConfig {
    *
    * @return
    */
-  @Bean
+  // @Bean
   public SpringProcessEngineConfiguration processEngineConfiguration() {
+
     SpringProcessEngineConfiguration configuration = new SpringProcessEngineConfiguration();
     // 执行工作流对应的数据源
     configuration.setDataSource(dataSource);

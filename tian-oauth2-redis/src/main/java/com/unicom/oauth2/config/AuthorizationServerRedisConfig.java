@@ -24,6 +24,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
@@ -51,8 +52,8 @@ public class AuthorizationServerRedisConfig extends AuthorizationServerConfigure
   @Autowired private DataSource dataSource;
 
   @Autowired private AuthorizationCodeServices authorizationCodeServices;
-
-  // 这个是定义授权的请求的路径的Bean
+  @Autowired private WebResponseExceptionTranslator webResponseExceptionTranslator;
+  // 这个是定义授权的请求的路径的Bean  从数据库读取
   @Bean
   public ClientDetailsService clientDetails() {
     JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
@@ -81,10 +82,16 @@ public class AuthorizationServerRedisConfig extends AuthorizationServerConfigure
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     /*redis配置*/
     endpoints
+        // 密码模式需要
         .authenticationManager(authenticationManager)
+        // 授权码从jdbc获得
         .authorizationCodeServices(authorizationCodeServices)
+        // refresh_token需要
         .userDetailsService(userService)
+        // token存储redis
         .tokenStore(tokenStore);
+    // 自定义登录或者鉴权失败时的返回信息
+    endpoints.exceptionTranslator(webResponseExceptionTranslator);
   }
 
   /**

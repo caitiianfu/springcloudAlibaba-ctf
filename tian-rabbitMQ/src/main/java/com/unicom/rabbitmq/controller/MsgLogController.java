@@ -6,6 +6,7 @@ import com.unicom.common.annotation.DataScopeAnnotation;
 import com.unicom.common.api.ResultUtils;
 import com.unicom.generator.entity.MsgLog;
 import com.unicom.rabbitmq.bo.Mail;
+import com.unicom.rabbitmq.config.MailMsgSender;
 import com.unicom.rabbitmq.config.RabbitConfig;
 import com.unicom.rabbitmq.service.IMsgLogService;
 import com.unicom.rabbitmq.util.MessageHelper;
@@ -19,6 +20,7 @@ import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MsgLogController {
 
   @Autowired private IMsgLogService iMsgLogService;
-
+  @Autowired private MailMsgSender mailSender;
   @Autowired private RabbitTemplate rabbitTemplate;
   //   @RequestMapping(value = "/send")
   //  @ApiOperation(value = "发送邮箱测试方法",notes = "简单测试")
@@ -38,7 +40,7 @@ public class MsgLogController {
 
   @ApiOperation(value = "发送信息测试")
   @RequestMapping("/send")
-  public ResultUtils send(@Validated Mail mail) {
+  public ResultUtils send(@RequestBody @Validated Mail mail) {
     String msgId = UUID.randomUUID().toString();
     mail.setMsgId(msgId);
     MsgLog msgLog = new MsgLog();
@@ -51,6 +53,7 @@ public class MsgLogController {
     msgLog.setNextTryTime(LocalDateTime.now().plusMinutes(1));
     iMsgLogService.save(msgLog);
     CorrelationData correlationData = new CorrelationData(msgId);
+    mailSender.mailSender();
     rabbitTemplate.convertAndSend(
         RabbitConfig.MAIL_EXCHANGE,
         RabbitConfig.MAIL_ROUTE_KEY,
@@ -71,5 +74,13 @@ public class MsgLogController {
 
     iMsgLogService.save(msgLog);
     return ResultUtils.success("111");
+  }
+
+  @ApiOperation(value = "测试LocalDatatime")
+  @RequestMapping("/localDateTime")
+  public ResultUtils localDateTime(@RequestBody @Validated Mail mail) {
+    String msgId = UUID.randomUUID().toString();
+    mail.setMsgId(msgId);
+    return ResultUtils.success(mail);
   }
 }

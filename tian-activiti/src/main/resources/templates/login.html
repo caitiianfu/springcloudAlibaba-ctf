@@ -1,22 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-    <script src="../static/js/163-angular.min.js"></script>
-    <script src="../static/js/login.js"></script>
-
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    function test() {
+      $.ajax({
+        url: "/login",
+        type: "POST",
+        data: {
+          "username": $("#username").val()
+        },
+        success: function (data) {
+          if (data.code == 200) {
+            if (data.info.type == 1) {
+              location.href = "/home";
+            } else {
+              location.href = "/homeApprover";
+            }
+          } else {
+            alert(data.msg);
+          }
+        }
+      });
+    }
+  </script>
+  <meta charset="UTF-8"/>
+  <title>工作流</title>
 </head>
-<body ng-app="vacApp">
-<div ng-controller="loginCtrl">
-    <h1>login</h1>
-    <p>
-        userName: <input ng-model="userName" type="text" value="{{userName}}"/>
-    </p>
-    <p>
-        password: <input ng-model="password" type="password" value="{{password}}"/>
-    </p>
-    <button type="button" ng-click="login()">login</button>
+<body>
+<div>
+  <span>登录</span>
+  <input id="username" placeholder="用户名"/><br/>
+  <button onclick="test()">提交</button>
 </div>
+<img src="/resource?id=21"/>
 </body>
+
 </html>
+
+<style>
+  * {
+    font-family: "微软雅黑";
+    font-size: 15px;
+    margin: 0 auto;
+  }
+
+  div {
+    width: 400px;
+    margin-top: 100px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  input, button {
+    margin-top: 10px;
+  }
+
+  input {
+    width: 400px;
+    padding: 5px 3px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 5px 0;
+    width: 408px;
+  }
+</style>
+

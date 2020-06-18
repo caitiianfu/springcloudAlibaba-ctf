@@ -33,7 +33,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
     platform: mysql
-    url: jdbc:mysql://localhost:3306/ac5?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/tian?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true&nullCatalogMeansCurrent=true
     username: ctf
     password: 123
     initialSize: 5
@@ -56,14 +56,19 @@ spring:
       login-username: druid
       login-password: druid
   activiti:
+    #自动更新数据库结构
     database-schema-update: true
+    #自动检查、部署流程定义文件
     check-process-definitions: true
-    #流程文件前缀
+    # asyncExecutorActivate是指activiti在流程引擎启动就激活AsyncExecutor,异步：true-开启（默认）、false-关闭
+    spring.activiti.async-executor-activate: true
+    #流程定义文件存放目录,要具体到某个目录
     process-definition-location-prefix: classpath:/processes/
     history-level: full
-    #process-definition-location-suffixes:
-    #- **.bpmn
-    #- **.bpmn.xml
+    db-history-used: true
+  #process-definition-location-suffixes:
+  #- **.bpmn
+  #- **.bpmn.xml
 mybatis-plus:
   #mapper-locations: classpath:com/unicom/generator/mapper/xml/*.xml
   mapper-locations: classpath:mapper/*.xml

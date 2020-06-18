@@ -28,11 +28,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-       <!-- <dependency>
+       <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>1.9.6</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>com.unicom</groupId>
             <artifactId>tian-mbg</artifactId>
