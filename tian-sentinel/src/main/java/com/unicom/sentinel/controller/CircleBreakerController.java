@@ -25,7 +25,14 @@ public class CircleBreakerController {
   @RequestMapping("/fallback")
   @SentinelResource(value = "fallback", fallback = "handleFallback")
   public ResultUtils fallback() {
-    return restTemplate.getForObject(serviceUrl + "/test/redisList2", ResultUtils.class);
+    ResultUtils r = restTemplate.getForObject(serviceUrl + "/test/redisList2", ResultUtils.class);
+    return ResultUtils.success("222");
+  }
+
+  @RequestMapping("/tt")
+  @SentinelResource(value = "tt", fallback = "handleFallback")
+  public String tt() {
+    return restTemplate.getForObject(serviceUrl + "/test/tt", String.class);
   }
 
   public ResultUtils handleFallback() {

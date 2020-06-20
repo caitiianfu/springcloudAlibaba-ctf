@@ -24,7 +24,7 @@ spring:
       force: true
       charset: UTF-8
   application:
-    name: tian-redis
+    name: tian-redisTemplate
   cloud:
     nacos:
       discovery:
