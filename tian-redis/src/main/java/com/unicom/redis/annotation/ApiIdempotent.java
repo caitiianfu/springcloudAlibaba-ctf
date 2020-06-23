@@ -7,13 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * 幂等性注解
- * @author by ctf
- * @Classsname ApiIdempotent
- * @Description TODO
- * @Date 2020/5/25 14:24
- **/
+ *
+ * @author by ctf @Classsname ApiIdempotent @Description TODO @Date 2020/5/25 14:24
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiIdempotent {
-
-}
+public @interface ApiIdempotent {}

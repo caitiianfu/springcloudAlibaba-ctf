@@ -1,5 +1,5 @@
 server:
-  port: 3360
+  port: 3380
   undertow:
     #IO线程数, 它主要执行非阻塞的任务，它们会负责多个连接，默认设置每个CPU核心一个线程，不可设置过大，否则启动项目会报错：打开文件数过多。
     io-threads: 16
@@ -24,17 +24,20 @@ spring:
       force: true
       charset: UTF-8
   application:
-    name: tian-redis
+    name: tian-seata-account
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8899
+    alibaba:
+      seata:
+        tx-service-group: fps_tx_group #自定义事务组名称需要与seata-server中的对应
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
     platform: mysql
-    url: jdbc:mysql://localhost:3306/tian?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/seat-account?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
     username: ctf
     password: 123
     initialSize: 5

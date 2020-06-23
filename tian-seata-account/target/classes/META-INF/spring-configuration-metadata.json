@@ -1,51 +1,27 @@
 {
   "groups": [
     {
-      "name": "redis",
-      "type": "com.unicom.redis.config.RedisConfig",
-      "sourceType": "com.unicom.redis.config.RedisConfig"
+      "name": "mybatis",
+      "type": "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean",
+      "sourceType": "com.unicom.account.config.DataSourceProxyConfig",
+      "sourceMethod": "sqlSessionFactoryBean(javax.sql.DataSource)"
     }
   ],
   "properties": [
     {
-      "name": "redis.host",
-      "type": "java.lang.String",
-      "sourceType": "com.unicom.redis.config.RedisConfig"
+      "name": "mybatis.cache",
+      "type": "org.apache.ibatis.cache.Cache",
+      "sourceType": "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean"
     },
     {
-      "name": "redis.password",
-      "type": "java.lang.String",
-      "sourceType": "com.unicom.redis.config.RedisConfig"
+      "name": "mybatis.database-id-provider",
+      "type": "org.apache.ibatis.mapping.DatabaseIdProvider",
+      "sourceType": "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean"
     },
     {
-      "name": "redis.pool-max-idle",
-      "type": "java.lang.Integer",
-      "sourceType": "com.unicom.redis.config.RedisConfig",
-      "defaultValue": 0
-    },
-    {
-      "name": "redis.pool-max-total",
-      "type": "java.lang.Integer",
-      "sourceType": "com.unicom.redis.config.RedisConfig",
-      "defaultValue": 0
-    },
-    {
-      "name": "redis.pool-max-wait",
-      "type": "java.lang.Integer",
-      "sourceType": "com.unicom.redis.config.RedisConfig",
-      "defaultValue": 0
-    },
-    {
-      "name": "redis.port",
-      "type": "java.lang.Integer",
-      "sourceType": "com.unicom.redis.config.RedisConfig",
-      "defaultValue": 0
-    },
-    {
-      "name": "redis.timeout",
-      "type": "java.lang.Integer",
-      "sourceType": "com.unicom.redis.config.RedisConfig",
-      "defaultValue": 0
+      "name": "mybatis.vfs",
+      "type": "java.lang.Class<? extends org.apache.ibatis.io.VFS>",
+      "sourceType": "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean"
     }
   ],
   "hints": []

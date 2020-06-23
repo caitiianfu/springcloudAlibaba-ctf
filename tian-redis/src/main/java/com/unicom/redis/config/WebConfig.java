@@ -10,27 +10,21 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-/**
- * @author by ctf
- * @Classsname WebConfig
- * @Description TODO
- * @Date 2020/5/25 15:41
- **/
-
+/** @author by ctf @Classsname WebConfig @Description TODO @Date 2020/5/25 15:41 */
 @Configuration
-public class WebConfig implements WebMvcConfigurer  {
+public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private ApiIdempotentInterceptor apiIdempotentInterceptor;
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        //接口幂等性拦截器
-        registry.addInterceptor(apiIdempotentInterceptor);
-        //super.addInterceptors(registry);
-    }
+  @Autowired private ApiIdempotentInterceptor apiIdempotentInterceptor;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:G://img/");
-    }
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    // 接口幂等性拦截器
+    registry.addInterceptor(apiIdempotentInterceptor);
+    // super.addInterceptors(registry);
+  }
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/upload/**").addResourceLocations("file:G://img/");
+  }
 }

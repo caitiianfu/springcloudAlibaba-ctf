@@ -9,28 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tian-redis</artifactId>
+    <artifactId>tian-seata-account</artifactId>
 
 
     <dependencies>
 
-        <!-- aop依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-        <!--
-        重复依赖
-        <dependency>
-            <groupId>com.unicom</groupId>
-            <artifactId>tian-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>-->
 
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
@@ -42,7 +26,27 @@
             <artifactId>tian-mbg</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+        <!--seata-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>seata-all</artifactId>
+                    <groupId>io.seata</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <!--feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <!--<dependency>
             <groupId>com.unicom</groupId>
             <artifactId>tian-security</artifactId>
