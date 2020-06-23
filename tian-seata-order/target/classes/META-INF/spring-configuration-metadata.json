@@ -1,12 +1,5 @@
 {
-  "groups": [
-    {
-      "name": "mybatis",
-      "type": "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean",
-      "sourceType": "com.unicom.order.config.DataSourceProxyConfig",
-      "sourceMethod": "sqlSessionFactoryBean(javax.sql.DataSource)"
-    }
-  ],
+  "groups": [],
   "properties": [
     {
       "name": "mybatis.cache",

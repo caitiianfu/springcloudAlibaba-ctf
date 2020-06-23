@@ -31,7 +31,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
   /** 创建订单->调用库存服务扣减库存->调用账户服务扣减账户余额->修改订单状态 */
   @Override
-  @GlobalTransactional(name = "fps-create-order", rollbackFor = Exception.class)
+  @GlobalTransactional(
+      timeoutMills = 3000,
+      name = "fps-create-order",
+      rollbackFor = Exception.class)
   public void create(Order order) {
     LOGGER.info("------->下单开始");
     // 本应用创建订单
