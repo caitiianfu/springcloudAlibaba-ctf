@@ -1,6 +1,8 @@
 # SpringcloudAlibaba 系列
 ## **tian-activiti** 工作流引擎
   - 该模块主要实现工作流引擎一个小demo
+  - 整合了流程设计器，测试需要数据库中已经存在model记录，可以先调用create接口通过浏览器请求形式创建一个模型，然后浏览器跳转才可以看到效果,只要替换modelId就可以了。
+             访问 http:localhost:3350/modeler.html?modelId=25001
 ## **tian-admin**  管理员服务
   - 该模块主要集成mp+security实现鉴权认证
 ## **tian-common**  通用模块
