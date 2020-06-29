@@ -29,6 +29,9 @@
     <module>tian-redistemplate</module>
     <module>tian-sentinel</module>
 
+    <module>tian-rocketmq-producer</module>
+    <module>tian-rocketmq-consumer</module>
+
     <module>tian-seata-storage</module>
     <module>tian-seata-account</module>
     <module>tian-seata-order</module>
