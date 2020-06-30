@@ -30,11 +30,11 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account>
   public void decrease(Long userId, BigDecimal money) {
     LOGGER.info("------->account-service中扣减账户余额开始");
     // 模拟超时异常，全局事务回滚
-    /*  try {
+      try {
       Thread.sleep(30 * 1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
-    }*/
+    }
     accountMapper.decrease(userId, money);
     LOGGER.info("------->account-service中扣减账户余额结束");
   }

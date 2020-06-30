@@ -5,7 +5,6 @@ import com.unicom.rocketmq.constant.RocketConstant;
 import com.unicom.rocketmq.vo.PraiseRecordVO;
 import javax.annotation.Resource;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/send")
 public class MessageSenderController {
   @Resource private RocketMQTemplate rocketMQTemplate;
+  /*
 
-  @Value("${rocketmq.topic.user}")
-  private String userTopic;
+    @Value("${rocketmq.topic.user}")
+    private String userTopic;
 
-  @Value("${rocketmq.topic.order}")
-  private String orderTopic;
+    @Value("${rocketmq.topic.order}")
+    private String orderTopic;
+  */
 
   @PostMapping("/praise")
   public ResultUtils praise(@RequestBody PraiseRecordVO vo) {
