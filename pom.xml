@@ -32,6 +32,7 @@
     <module>tian-rocketmq</module>
 
     <module>tian-seata</module>
+    <module>tian-jedis</module>
 
 
   </modules>
