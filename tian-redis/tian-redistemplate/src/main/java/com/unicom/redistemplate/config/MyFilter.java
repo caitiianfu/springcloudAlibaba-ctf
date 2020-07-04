@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /** @author by ctf */
-@Component
+//@Component
 public class MyFilter implements Filter {
 
   // 过滤器无法获得ioc

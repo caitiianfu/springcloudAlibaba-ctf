@@ -2,6 +2,8 @@ package com.unicom.rocketmq.controller;
 /** */
 import com.unicom.common.api.ResultUtils;
 import com.unicom.rocketmq.constant.RocketConstant;
+import com.unicom.rocketmq.constant.RocketConstant.Topic;
+import com.unicom.rocketmq.pojo.PraiseRecord;
 import com.unicom.rocketmq.vo.PraiseRecordVO;
 import javax.annotation.Resource;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -31,24 +33,40 @@ public class MessageSenderController {
     @Value("${rocketmq.topic.order}")
     private String orderTopic;
   */
+  /**
+   *
+   * @Description 普通发送消息
+   * @param vo
+   * @return com.unicom.common.api.ResultUtils
+   * @date 2020/7/4
+   * @author ctf
+   **/
 
-  @PostMapping("/praise")
-  public ResultUtils praise(@RequestBody PraiseRecordVO vo) {
+  @PostMapping("/testNormal")
+  public String testNormal(@RequestBody PraiseRecordVO vo) {
     rocketMQTemplate.sendOneWay(
-        RocketConstant.Topic.PRAISE_TOPIC, MessageBuilder.withPayload(vo).build());
-    return ResultUtils.success("success");
+        Topic.TEST_NORMALL_TOPIC, MessageBuilder.withPayload(vo).build());
+    return "send testNormal success";
+  }
+  /**
+   *
+   * @Description 延迟发送消息
+   * @param name
+   * @return java.lang.String
+   * @date 2020/7/4
+   * @author ctf
+   **/
+
+  @PostMapping("/testDelay")
+  public String testDelay(@RequestBody PraiseRecordVO praiseRecord) {
+      rocketMQTemplate.send(
+         Topic.TEST_DELAY_TOPIC, MessageBuilder.withPayload(praiseRecord).build());
+    return "send testDelay success";
   }
 
-  @GetMapping("/user")
-  public String sendUser(@RequestParam String name) {
-    //  rocketMQTemplate.send(
-    //      userTopic, MessageBuilder.withPayload(new UserInfo().setId(1).setName(name)).build());
-    return "send user success";
-  }
-
-  @GetMapping("/order")
-  public String sendOrder(@RequestParam String msg) {
-    // rocketMQTemplate.send(orderTopic, MessageBuilder.withPayload(msg).build());
-    return "send order success";
+  @PostMapping("/testBatch")
+  public String testBatch(@RequestBody PraiseRecordVO praiseRecord) {
+     rocketMQTemplate.send(Topic.TEST_BATCH_TOPIC, MessageBuilder.withPayload(praiseRecord).build());
+    return "send testBatch success";
   }
 }

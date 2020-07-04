@@ -9,16 +9,14 @@ package com.unicom.rocketmq.constant;
  */
 public interface RocketConstant {
   interface ConsumerGroup {
-    String SPRING_BOOT_CONSUMER = "spring-boot-consumer";
-    String PRAISE_CONSUMER = "praise-consumer";
-    String SPRING_BOOT_USER_CONSUMER = "spring-boot-user-consumer";
-    String BBB = "BBB";
+    String TEST_NORMAL_CONSUMER = "test-normal-consumer";
+    String TEST_DELAY_CONSUMER = "test-delay-consumer";
+    String TEST_BATCH_CONSUMER = "test-batch-consumer";
   }
 
   interface Topic {
-    String SPRING_BOOT_TOPIC = "spring-boot-topic";
-    String PRAISE_TOPIC = "praise-topic";
-    String SPRING_BOOT_USER_TOPIC = "spring-boot-user-topic";
-    String BBB = "BBB";
+    String TEST_NORMALL_TOPIC = "test-normal-topic";
+    String TEST_DELAY_TOPIC = "test-delay-topic";
+    String TEST_BATCH_TOPIC = "test-batch-topic";
   }
 }

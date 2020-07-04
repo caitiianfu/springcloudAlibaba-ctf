@@ -20,19 +20,16 @@
     <module>tian-search</module>
     <module>tian-mongo</module>
     <module>tian-redis</module>
-    <module>tian-redisson</module>
     <module>tian-rabbitMQ</module>
     <module>tian-activiti</module>
     <module>tian-netty</module>
     <module>tian-oauth2-redis</module>
     <module>tian-oauth2-jwt</module>
-    <module>tian-redistemplate</module>
     <module>tian-sentinel</module>
 
     <module>tian-rocketmq</module>
 
     <module>tian-seata</module>
-    <module>tian-jedis</module>
 
 
   </modules>

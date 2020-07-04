@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2020/6/27
  * @author ctf
  */
-@Configuration
+//@Configuration
 public class InteceptorConfig implements WebMvcConfigurer {
   @Bean
   public MyInterceptor myInterceptor() {
