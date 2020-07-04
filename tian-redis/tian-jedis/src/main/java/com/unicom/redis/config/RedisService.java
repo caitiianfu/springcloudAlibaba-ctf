@@ -147,7 +147,9 @@ public class RedisService {
       jedis = jedisPool.getResource();
       String realKey = keyPrefix.getPrefix() + key;
       byte[] v = jedis.get(realKey.getBytes());
-      if (v == null) return null;
+      if (v == null) {
+        return null;
+      }
       return (List<T>) ObjectTransCode.deserialize(v);
     } finally {
       closeRedis(jedis);

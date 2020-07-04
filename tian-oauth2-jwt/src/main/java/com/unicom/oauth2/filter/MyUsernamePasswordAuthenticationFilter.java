@@ -68,7 +68,7 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
   }
   /** 校验验证码 */
   private boolean checkValidateCode(String verifyCode) {
-    if (StringUtils.isEmpty(verifyCode) || !verifyCode.equals("1234")) {
+    if (StringUtils.isEmpty(verifyCode) || !"1234".equals(verifyCode)) {
       return false;
     }
     return true;

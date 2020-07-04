@@ -173,7 +173,7 @@ public class MiaoServiceImpl implements MiaoService {
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
       for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("userInfo")) {
+        if ("userInfo".equals(cookie.getName())) {
           user = cookie.getValue();
         }
       }

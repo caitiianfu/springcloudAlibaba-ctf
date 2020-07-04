@@ -14,7 +14,9 @@ import org.springframework.amqp.core.MessageProperties;
  **/
 public class MessageHelper {
     public  static Message objToMsg(Object obj){
-        if (obj==null) return  null;
+        if (obj==null) {
+            return  null;
+        }
         Message message= MessageBuilder.withBody(JSONObject.toJSONString(obj).getBytes())
                 .build();
         message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);

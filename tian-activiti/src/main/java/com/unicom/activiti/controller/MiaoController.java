@@ -30,7 +30,7 @@ public class MiaoController {
     // 从cookie中获取当前用户
     if (cookies != null) {
       for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("userInfo")) {
+        if ("userInfo".equals(cookie.getName())) {
           user = cookie.getValue();
           break;
         }

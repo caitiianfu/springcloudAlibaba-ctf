@@ -58,7 +58,7 @@ public class JsonController {
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
       for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("userInfo")) {
+        if ("userInfo".equals(cookie.getName())) {
           cookie.setValue(null);
           // 立即销毁cookie
           cookie.setMaxAge(0);

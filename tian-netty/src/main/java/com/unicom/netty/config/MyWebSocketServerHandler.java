@@ -76,7 +76,7 @@ public class MyWebSocketServerHandler extends SimpleChannelInboundHandler<Object
     }
     String request = ((TextWebSocketFrame) frame).text();
     // 这个有问题
-    if (request.equals("heart")) {
+    if ("heart".equals(request)) {
       ctx.channel().write(new TextWebSocketFrame(request));
       return;
     }

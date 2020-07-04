@@ -44,8 +44,9 @@ public class BlogController {
     }
     @GetMapping("/get/{id}")
     public ResultUtils getById(@PathVariable String id){
-        if (StringUtils.isEmpty(id))
-            Assert.fail(ResultCode.NULL_POINT);
+        if (StringUtils.isEmpty(id)) {
+          Assert.fail(ResultCode.NULL_POINT);
+        }
         Optional<BlogModel> blogModelOption=blogRepository.findById(id);
         if (blogModelOption.isPresent()){
             BlogModel blogModel=blogModelOption.get();
@@ -82,21 +83,24 @@ public class BlogController {
     }
     @GetMapping("/get/title")
     public ResultUtils getSearchTitle(String keyword){
-        if (StringUtils.isEmpty(keyword))
+        if (StringUtils.isEmpty(keyword)) {
             Assert.fail(ResultCode.NULL_POINT);
+        }
         return ResultUtils.success(blogRepository.findByTitleLike(keyword));
     }
     @GetMapping("/get/titleCustom")
     public ResultUtils getSearchTitleCustom(String keyword){
-        if (StringUtils.isEmpty(keyword))
+        if (StringUtils.isEmpty(keyword)) {
             Assert.fail(ResultCode.NULL_POINT);
+        }
         return ResultUtils.success(blogRepository.findByTitleCustom(keyword));
     }
 
     @GetMapping("/get/titleTemplate")
     public ResultUtils getSearchTitleTemplate(String keyword){
-        if (StringUtils.isEmpty(keyword))
+        if (StringUtils.isEmpty(keyword)) {
             Assert.fail(ResultCode.NULL_POINT);
+        }
         SearchQuery searchQuery=new NativeSearchQueryBuilder()
                                 .withQuery(new MatchQueryBuilder("title",keyword)).build();
         return ResultUtils.success(elasticsearchTemplate.queryForList(searchQuery,BlogModel.class));

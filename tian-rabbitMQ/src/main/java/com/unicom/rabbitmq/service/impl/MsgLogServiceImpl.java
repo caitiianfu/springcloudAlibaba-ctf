@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class MsgLogServiceImpl extends ServiceImpl<MsgLogMapper, MsgLog> implements IMsgLogService {
   @Autowired private MsgLogMapper msgLogMapper;
 
+  @Override
   public List<MsgLog> testSelect(MsgLog msgLog) {
     return msgLogMapper.testSelect(msgLog);
   }

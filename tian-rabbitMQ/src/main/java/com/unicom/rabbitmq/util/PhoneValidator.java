@@ -20,7 +20,9 @@ public class PhoneValidator implements ConstraintValidator<IsMobile, String> {
     private Pattern pattern=Pattern.compile("^1[345678]\\d{9}$");
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (StringUtils.isEmpty(value)) return true;
+        if (StringUtils.isEmpty(value)) {
+          return true;
+        }
         Matcher matcher=pattern.matcher(value);
         return matcher.matches();
     }

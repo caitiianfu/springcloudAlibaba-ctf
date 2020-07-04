@@ -29,6 +29,7 @@ public class TianSecurityConfig extends SecurityConfig {
     private IUmsAdminService iUmsAdminService;
     @Autowired
     private IUmsResourceService iUmsResourceService;
+    @Override
     @Bean
     @Order
     public UserDetailsService userDetailsService(){
