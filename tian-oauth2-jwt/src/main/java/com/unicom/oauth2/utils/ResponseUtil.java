@@ -36,14 +36,14 @@ public class ResponseUtil {
   }
 
   public static Map<String, Object> resultMap(Integer code, String msg) {
-    Map<String, Object> resultMap = new HashMap<String, Object>();
+    Map<String, Object> resultMap = new HashMap<String, Object>(2);
     resultMap.put("message", msg);
     resultMap.put("code", code);
     return resultMap;
   }
 
   public static Map<String, Object> resultMap(Integer status, String msg, Object data) {
-    Map<String, Object> resultMap = new HashMap<String, Object>();
+    Map<String, Object> resultMap = new HashMap<String, Object>(3);
     resultMap.put("message", msg);
     resultMap.put("status", status);
     resultMap.put("data", data);

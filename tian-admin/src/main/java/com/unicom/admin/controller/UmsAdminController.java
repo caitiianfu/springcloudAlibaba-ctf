@@ -50,7 +50,7 @@ public class UmsAdminController {
         @RequestMapping(value = "/login",method = RequestMethod.POST)
         public ResultUtils login(@Valid @RequestBody(required = false) UmsAdminLoginVo umsAdminLoginVo){
                 String token=iUmsAdminService.login(umsAdminLoginVo.getUsername(),umsAdminLoginVo.getPassword());
-                Map<String,Object> tokenMap=new HashMap<>();
+                Map<String,Object> tokenMap=new HashMap<>(2);
                 tokenMap.put("token",token);
                 tokenMap.put("tokenHead",tokenHead);
                 return ResultUtils.success(tokenMap);

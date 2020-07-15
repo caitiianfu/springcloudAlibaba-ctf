@@ -72,7 +72,7 @@ public class WebLogAspect {
                 webLog.setStartTime(startTime);
                 webLog.setUri(request.getRequestURI());
                 webLog.setResult(result);
-                Map<String,Object> logMap=new HashMap<>();
+                Map<String,Object> logMap=new HashMap<>(5);
                 logMap.put("url",webLog.getUrl());
                 logMap.put("parameter",webLog.getParameter());
                 logMap.put("spendTime",webLog.getSpendTime());
@@ -93,7 +93,7 @@ public class WebLogAspect {
                         //获得requestParam的参数
                         RequestParam requestParam=parameters[i].getAnnotation(RequestParam.class);
                         if (requestParam!=null){
-                                Map<String,Object> map=new HashMap<>();
+                                Map<String,Object> map=new HashMap<>(16);
                                 String key=parameters[i].getName();
                                 if (!StringUtils.isEmpty(requestParam.value())){
                                     key=requestParam.value();

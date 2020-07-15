@@ -7,8 +7,8 @@
   - 该模块主要集成mp+security实现鉴权认证
 ## **tian-common**  通用模块
   - 该模块主要包含了通用的工具类，包含
-  全局异常处理、Druid连接池配置、mp配置、swagger配置、
-  数据鉴权
+    全局异常处理、Druid连接池配置、mp配置、swagger配置、
+    数据鉴权
 ## **tian-gateway**  网关服务
   - 微服务网关，采用的事WebFlux
 ## **tian-gen**  代码生成
@@ -21,18 +21,19 @@
   - netty通信，目前无用
 ## **tian-oauth2-jwt**  
   - oauth2-security使用jwt作为token验证，
-  jdbc获取验证配置并整合路径拦截
+    jdbc获取验证配置并整合路径拦截
 ## **tian-oauth2-redis** 
   - oauth2-security使用redis作为token验证，
        jdbc获取验证配置并整合路径拦截
 ## **tian-rabbitmq**   队列模块
   - 实现队列延迟队列：1、死信  2、定时任务
 ## **tian-redis**   缓存模块
-  - 使用jedis实现redis缓存操作，包括幂等性和分布式锁
-## **tian-redisson**  缓存模块
-  - redisson实现分布式锁
-## **tian-redisTemplate**  缓存模块
-  - 使用springboot-data-redis实现缓存操作
+  - **tian-jedis**   jedis实现 
+      使用jedis实现redis缓存操作，包括幂等性和分布式锁
+  - **tian-redisson**  缓存模块
+      redisson实现分布式锁
+  - **tian-redisTemplate**  缓存模块
+      使用springboot-data-redis实现缓存操作
 ## **tian-search**   搜索引擎
   - elasticSearch实现搜索引擎
 ## **tian-security**   验证模块
@@ -41,5 +42,16 @@
   - 使用sentinel熔断机制及feign远程调用
 ## **分布式事务**
 - **tian-seata-account**   账户服务
+
 - **tian-seata-order**     订单服务
+
 - **tian-seata-storage**   库存服务
+
+## **tian-monitor** 全局监控中心
+
+- 负责查看各个服务的执行情况
+
+##  **tian-xxl-job** 中心任务集成xxl-job
+- **xxl-job-admin**   调度中心服务，可进行配置，地址http://localhost:8080/xxl-job-admin/
+- **xxl-job-executor**  执行器的聚合文件
+  - **xxl-job-executor-sample-springboot**    执行器springboot版本

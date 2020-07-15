@@ -31,6 +31,9 @@
 
     <module>tian-seata</module>
 
+    <module>tian-hadoop</module>
+    <module>tian-xxl-job</module>
+    <module>tian-monitor</module>
 
   </modules>
 
@@ -48,6 +51,7 @@
     <java.version>1.8</java.version>
     <skipTests>true</skipTests>
     <!--
+       admin-starter-server.version
             <spring-cloud.version>Finchley.SR2</spring-cloud.version>
     -->
 
@@ -66,6 +70,7 @@
     <tian-common.version>1.0-SNAPSHOT</tian-common.version>
     <tian-mbg.version>1.0-SNAPSHOT</tian-mbg.version>
     <tian-security.version>1.0-SNAPSHOT</tian-security.version>
+    <admin-starter-server.version>2.1.0</admin-starter-server.version>
   </properties>
 
   <dependencies>

@@ -46,7 +46,7 @@ public class TianSecurityConfig extends SecurityConfig {
     @Bean
     public DynamicSecurityService dynamicSecurityService(){
         return ()->{
-            Map<String, ConfigAttribute> map=new ConcurrentHashMap<>();
+            Map<String, ConfigAttribute> map=new ConcurrentHashMap<>(64);
             List<UmsResource> resourceList = iUmsResourceService.listAll();
             for (UmsResource resource : resourceList) {
                 map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(resource.getId() + ":" + resource.getName()));
