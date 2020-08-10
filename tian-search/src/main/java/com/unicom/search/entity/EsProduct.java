@@ -186,4 +186,28 @@ public class EsProduct implements Serializable {
     public void setKeywords(String keywords) {
         this.keywords = keywords;
     }
+
+    @Override
+    public String toString() {
+        return "EsProduct{" +
+            "id=" + id +
+            ", productSn='" + productSn + '\'' +
+            ", brandId=" + brandId +
+            ", brandName='" + brandName + '\'' +
+            ", productCategoryId=" + productCategoryId +
+            ", productCategoryName='" + productCategoryName + '\'' +
+            ", pic='" + pic + '\'' +
+            ", name='" + name + '\'' +
+            ", subTitle='" + subTitle + '\'' +
+            ", keywords='" + keywords + '\'' +
+            ", price=" + price +
+            ", sale=" + sale +
+            ", newStatus=" + newStatus +
+            ", recommandStatus=" + recommandStatus +
+            ", stock=" + stock +
+            ", promotionType=" + promotionType +
+            ", sort=" + sort +
+            ", attrValueList=" + attrValueList +
+            '}';
+    }
 }

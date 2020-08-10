@@ -68,7 +68,7 @@ public class MpGenerator {
         strategy.setTablePrefix(new String[] { });// 此处可以修改为您的表前缀,表名去掉前缀
         strategy.setRestControllerStyle(true);
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略，underline_to_camel驼峰表名
-      //  strategy.setInclude(new String[] { "category","user"}); // 需要生成的表
+        //strategy.setInclude(new String[] { "pms_product","pms_product_attribute"}); // 需要生成的表
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);//字段驼峰
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类

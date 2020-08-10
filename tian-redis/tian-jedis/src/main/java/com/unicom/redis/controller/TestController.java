@@ -97,4 +97,10 @@ public class TestController {
     System.out.println(1111);
     return "tt";
   }
+  @GetMapping("/testForest")
+  @ApiOperation(value = "testForest")
+  public String testForest(HttpServletRequest request,String name) {
+
+    return name;
+  }
 }
