@@ -22,6 +22,7 @@ public class TestController {
   public String minioUpload(MultipartFile file, String fileName, String bucketName) {
     return minioUtil.minioUpload(file,fileName,bucketName);
   }
+
   @PostMapping("/download")
   public String downloadFile(String objectName, String bucketName, HttpServletResponse response) {
     return minioUtil.downloadFile(objectName,bucketName,response);

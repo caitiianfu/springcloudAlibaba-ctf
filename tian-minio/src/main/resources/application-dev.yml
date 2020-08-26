@@ -35,8 +35,8 @@ spring:
 minio:
   ip: 62.234.144.136:9000
   # minio登录账号密码
-  accessKey: minio
-  secretKey: minio
+  accessKey: minioadmin
+  secretKey: minioadmin
   ## 桶名（文件夹）命名规则要符合 亚马逊S3标准 详情可看http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
   bucketName:
     ## 照片文件夹

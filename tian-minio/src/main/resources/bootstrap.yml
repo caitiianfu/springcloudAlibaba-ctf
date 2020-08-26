@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+     active: dev
   application:
     name: tian-minio
   cloud:

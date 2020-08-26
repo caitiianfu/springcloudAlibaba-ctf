@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,12 +42,13 @@ public class MinioUtil {
    */
   @Value("${minio.secretKey}")
   private String secretKey;
-
+  @Autowired
+  private MinioClient minioClient;
   /**
    * 缩略图大小
    */
-  @Value("${minio.thumbor.width}")
-  private String thumborWidth;
+//  @Value("${minio.thumbor.width}")
+//  private String thumborWidth;
 
 
   /**
@@ -59,7 +61,7 @@ public class MinioUtil {
    */
   public String minioUpload(MultipartFile file, String fileName, String bucketName) {
     try {
-      MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
+      //MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
       boolean bucketExists = minioClient.bucketExists(bucketName);
       if (bucketExists) {
         log.info("仓库" + bucketName + "已经存在，可直接上传文件。");
@@ -105,7 +107,7 @@ public class MinioUtil {
   public boolean isFileExisted(String fileName, String bucketName) {
     InputStream inputStream = null;
     try {
-      MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
+     // MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
       inputStream = minioClient.getObject(bucketName, fileName);
       if (inputStream != null) {
         return true;
@@ -133,7 +135,7 @@ public class MinioUtil {
    */
   public boolean delete(String bucketName, String fileName) {
     try {
-      MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
+     // MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
       minioClient.removeObject(bucketName, fileName);
       return true;
     } catch (Exception e) {
@@ -152,7 +154,7 @@ public class MinioUtil {
    */
   public String downloadFile(String objectName, String bucketName, HttpServletResponse response) {
     try {
-      MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
+     // MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
       InputStream file = minioClient.getObject(bucketName, objectName);
       String filename = new String(objectName.getBytes("ISO8859-1"), StandardCharsets.UTF_8);
       response.setHeader("Content-Disposition", "attachment;filename=" + filename);
@@ -185,7 +187,7 @@ public class MinioUtil {
    */
   public InputStream getFileInputStream(String objectName, String bucketName) {
     try {
-      MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
+     // MinioClient minioClient = new MinioClient("http://" + ip, accessKey, secretKey);
       return minioClient.getObject(bucketName, objectName);
     } catch (Exception e) {
       e.printStackTrace();

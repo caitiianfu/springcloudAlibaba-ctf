@@ -19,7 +19,15 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 
-/** @author by ctf */
+/**
+ *
+ * @Description mybatis拦截器，处理sql拼接进行数据权限控制
+ * @param null
+ * @return
+ * @date 2020/8/15
+ * @author ctf
+ **/
+
 @Intercepts({
   @Signature(
       type = StatementHandler.class,
