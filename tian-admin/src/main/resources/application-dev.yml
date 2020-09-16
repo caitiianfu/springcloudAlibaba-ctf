@@ -13,30 +13,50 @@ server:
     direct-buffers: true
 
 
-redis:
-  host: 127.0.0.1
-  port: 6379
-  timeout: 3
-  password: 12345
-  poolMaxTotal: 10
-  poolMaxIdle: 10
-  poolMaxWait: 3
+#redis:
+#  host: 127.0.0.1
+#  port: 6379
+#  timeout: 3
+#  password: 12345
+#  poolMaxTotal: 10
+#  poolMaxIdle: 10
+#  poolMaxWait: 3
 #tomcat:
 #  remote-ip-header: x-forward-for
 #  uri-encoding: UTF-8
 #  max-threads: 10
 #  background-processor-delay: 30
 spring:
-  http:
-    encoding:
-      force: true
-      charset: UTF-8
   application:
-    name: tian-admin
+    name: tidasd
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8899
+      config:
+        server-addr: localhost:8899
+  #      config:
+#        server-addr: localhost:8899
+#        file-extension: yaml
+#        config-long-poll-timeout: 6000
+  redis:
+    #数据库索引
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 12345
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+        #连接超时时间
+        timeout: 10000
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -77,27 +97,8 @@ management: #开启SpringBoot Admin的监控
   endpoint:
     health:
       show-details: always
-jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: tian-admin-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24)
-  tokenHead: Bearer  #JWT负载中拿到开头
-secure:
-  ignored:
-     urls:
-         - /swagger-ui.html
-         - /swagger-resources/**
-         - /swagger/**
-         - /**/v2/api-docs
-         - /**/*.js
-         - /**/*.css
-         - /**/*.png
-         - /**/*.ico
-         - /webjars/springfox-swagger-ui/**
-         - /actuator/**
-         - /druid/**
-         - /umsAdmin/login
-         - /umsAdmin/register
-         - /umsAdmin/info
-         - /umsAdmin/logout
-         - /minio/upload
+#jwt:
+#  tokenHeader: Authorization #JWT存储的请求头
+#  secret: tian-admin-secret #JWT加解密使用的密钥
+#  expiration: 604800 #JWT的超期限时间(60*60*24)
+#  tokenHead: Bearer  #JWT负载中拿到开头

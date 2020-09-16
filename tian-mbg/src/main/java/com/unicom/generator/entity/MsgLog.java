@@ -2,7 +2,6 @@ package com.unicom.generator.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.unicom.common.pojo.DataScope;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -46,6 +45,7 @@ public class MsgLog extends Model<MsgLog> {
   @ApiModelProperty(value = "更新时间")
   private LocalDateTime updateTime;
 
+/*
   @TableField(exist = false)
   private DataScope dataScope = new DataScope();
 
@@ -56,6 +56,7 @@ public class MsgLog extends Model<MsgLog> {
   public void setDataScope(DataScope dataScope) {
     this.dataScope = dataScope;
   }
+*/
 
   public String getMsgId() {
     return msgId;

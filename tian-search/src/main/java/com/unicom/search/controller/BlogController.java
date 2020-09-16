@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -96,7 +95,7 @@ public class BlogController {
         return ResultUtils.success(blogRepository.findByTitleCustom(keyword));
     }
 
-    @GetMapping("/get/titleTemplate")
+  /*  @GetMapping("/get/titleTemplate")
     public ResultUtils getSearchTitleTemplate(String keyword){
         if (StringUtils.isEmpty(keyword)) {
             Assert.fail(ResultCode.NULL_POINT);
@@ -104,13 +103,13 @@ public class BlogController {
         SearchQuery searchQuery=new NativeSearchQueryBuilder()
                                 .withQuery(new MatchQueryBuilder("title",keyword)).build();
         return ResultUtils.success(elasticsearchTemplate.queryForList(searchQuery,BlogModel.class));
-    }
+    }*/
 
 
     /**
      * 全文搜索
      */
-    @GetMapping("/get/titleTemplatePage")
+   /* @GetMapping("/get/titleTemplatePage")
     public ResultUtils getSearchTitleTemplatePage(String keyword,int page,int size){
 
         if (StringUtils.isEmpty(page)){
@@ -130,5 +129,5 @@ public class BlogController {
         }
         SearchQuery searchQuery=searchQueryBuilder.build();
         return ResultUtils.success(elasticsearchTemplate.queryForPage(searchQuery,BlogModel.class));
-    }
+    }*/
 }

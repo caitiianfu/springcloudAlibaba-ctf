@@ -37,6 +37,8 @@
     <module>tian-forest</module>
     <module>tian-plumelog</module>
     <module>tian-minio</module>
+    <module>tian-auth</module>
+    <module>tian-gateway-auth</module>
 
   </modules>
 
@@ -44,7 +46,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.7.RELEASE</version>
+    <version>2.3.0.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -58,11 +60,11 @@
             <spring-cloud.version>Finchley.SR2</spring-cloud.version>
     -->
 
-    <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
-    <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
+    <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+    <spring-cloud-alibaba.version>2.2.0.RELEASE</spring-cloud-alibaba.version>
     <pagehelper-starter.version>1.2.10</pagehelper-starter.version>
     <pagehelper.version>5.1.8</pagehelper.version>
-    <druid.version>1.1.10</druid.version>
+    <druid.version>1.1.21</druid.version>
     <hutool.version>4.5.7</hutool.version>
     <swagger2.version>2.7.0</swagger2.version>
     <mybatis-generator.version>1.3.7</mybatis-generator.version>
@@ -74,9 +76,12 @@
     <tian-mbg.version>1.0-SNAPSHOT</tian-mbg.version>
     <tian-security.version>1.0-SNAPSHOT</tian-security.version>
     <admin-starter-server.version>2.1.0</admin-starter-server.version>
+    <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
+
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -90,7 +95,19 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
@@ -133,7 +150,9 @@
       <dependency>
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>3.0.5</version>
+<!--        <version>3.0.5</version>-->
+        <version>3.1.2</version>
+
       </dependency>
       <!--集成druid连接池-->
       <dependency>
@@ -172,6 +191,13 @@
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt</artifactId>
         <version>${jjwt.version}</version>
+      </dependency>
+
+      <!--JWT(Json Web Token)登录支持-->
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>${nimbus-jose-jwt.version}</version>
       </dependency>
       <!--集成SpringBoot Admin监控-->
       <dependency>

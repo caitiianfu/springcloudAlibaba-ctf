@@ -24,13 +24,16 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.0.5</version>
+<!--            <version>3.0.5</version>-->
         </dependency>
-
+        <!--集成druid连接池-->
+         <dependency>
+             <groupId>com.alibaba</groupId>
+             <artifactId>druid-spring-boot-starter</artifactId>
+         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector.version}</version>
         </dependency>
 
         <!--Swagger-UI API文档生产工具-->
@@ -42,11 +45,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>-->
-        <dependency>
+    <!--    <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-micro-spring-boot-starter</artifactId>
             <version>1.9.6</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.unicom</groupId>
             <artifactId>tian-common</artifactId>

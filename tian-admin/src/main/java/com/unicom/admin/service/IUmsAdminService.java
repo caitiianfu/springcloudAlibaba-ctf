@@ -1,8 +1,9 @@
 package com.unicom.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.unicom.common.api.ResultUtils;
+import com.unicom.common.domain.UserDto;
 import com.unicom.generator.entity.UmsAdmin;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Map;
@@ -23,15 +24,17 @@ public interface IUmsAdminService extends IService<UmsAdmin> {
     /**
      * 获取用户信息
      */
-    UserDetails loadUserByUsername(String username);
+   // UserDetails loadUserByUsername(String username);
+    UserDto loadUserByUsername(String username);
     /**
      * 登录获得token
      */
-    String login(String username,String password);
+   // String login(String username,String password);
 
     List<Map<String,Object>> selectByColumn(List<String> ips);
 
 
-     List<Object> selectByColumnObject(List<String> ips);
+    List<Object> selectByColumnObject(List<String> ips);
 
+    ResultUtils login(String username,String password);
 }

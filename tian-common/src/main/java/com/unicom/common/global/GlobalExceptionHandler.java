@@ -1,6 +1,5 @@
 package com.unicom.common.global;
 
-import com.alibaba.druid.sql.visitor.functions.Bin;
 import com.unicom.common.api.ResultCode;
 import com.unicom.common.api.ResultEnum;
 import com.unicom.common.api.ResultUtils;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 

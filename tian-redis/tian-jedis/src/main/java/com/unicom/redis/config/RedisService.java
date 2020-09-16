@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.params.SetParams;
 
 /** @author by ctf @Classsname RedisService @Description TODO @Date 2020/5/25 9:40 */
 @Service
@@ -192,7 +193,10 @@ public class RedisService {
       }
       long expireTime = keyPrefix.getExpireSeconds();
       String realKey = keyPrefix.getPrefix() + key;
-      String result = jedis.set(realKey, v, "NX", "PX", expireTime * 1000);
+      //jedis.set()
+      //String result = jedis.set(realKey, v, "NX", "PX", expireTime * 1000);
+      SetParams setParams=new SetParams().nx().px(expireTime*1000);
+      String result=jedis.set(realKey,v,setParams);
       if ("OK".equals(result)) {
         return true;
       }
