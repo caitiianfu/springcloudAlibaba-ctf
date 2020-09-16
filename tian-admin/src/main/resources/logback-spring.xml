@@ -103,7 +103,7 @@
         <appender-ref ref="point_log_async" />
     </logger>
 	 -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ERROR"/>
         <appender-ref ref="INFO"/>
