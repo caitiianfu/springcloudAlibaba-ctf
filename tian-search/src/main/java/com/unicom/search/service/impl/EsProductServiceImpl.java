@@ -36,7 +36,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
@@ -56,7 +58,7 @@ public class EsProductServiceImpl implements EsProductService {
   @Autowired
   private EsProductDao esProductDao;
   @Autowired
-  private ElasticsearchTemplate elasticsearchTemplate;
+  private ElasticsearchRestTemplate elasticsearchTemplate;
   @Override
   public int importAll() {
     List<EsProduct> esProductList=esProductDao.getAllEsProductList(null);
@@ -102,7 +104,7 @@ public class EsProductServiceImpl implements EsProductService {
   @Override
   public Page<EsProduct> search(String keyword, Integer pageNum, Integer pageSize) {
     Pageable pageable= PageRequest.of(pageNum,pageSize);
-
+    if (StringUtils.isEmpty(keyword)) return esProductRepository.findAll(pageable);
     return esProductRepository.findByNameOrSubTitleOrKeywords(keyword,keyword,keyword,pageable);
   }
 
@@ -249,15 +251,18 @@ public class EsProductServiceImpl implements EsProductService {
                     .field("attrValueList.name"))));
     builder.addAggregation(aggregationBuilder);
     NativeSearchQuery searchQuery = builder.build();
-    return elasticsearchTemplate.query(searchQuery,response -> {
+    SearchHits<EsProduct> hits=elasticsearchTemplate.search(searchQuery,EsProduct.class);
+    /*return elasticsearchTemplate.
+        query(searchQuery,response -> {
       log.info("DSL:{}",searchQuery.getQuery().toString());
       return convertProductRelatedInfo(response);
-    });
+    });*/
+    return convertProductRelatedInfo(hits);
   }
   /**
    * 将返回结果转换为对象
    */
-  private EsProductRelatedInfo convertProductRelatedInfo(SearchResponse response) {
+  private EsProductRelatedInfo convertProductRelatedInfo(SearchHits<EsProduct> response) {
     EsProductRelatedInfo productRelatedInfo = new EsProductRelatedInfo();
     Map<String, Aggregation> aggregationMap = response.getAggregations().getAsMap();
     //设置品牌

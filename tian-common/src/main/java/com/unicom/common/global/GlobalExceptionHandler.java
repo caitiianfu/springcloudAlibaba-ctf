@@ -4,6 +4,7 @@ import com.unicom.common.api.ResultCode;
 import com.unicom.common.api.ResultEnum;
 import com.unicom.common.api.ResultUtils;
 import com.unicom.common.exception.ApiException;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -86,7 +87,7 @@ public class GlobalExceptionHandler {
     }
 
 
-  /*  @ExceptionHandler(Exception.class)
+   @ExceptionHandler(Exception.class)
     public ResultUtils handle(HttpServletRequest request, Exception e) {
         log.error(e.getMessage(),e);
 
@@ -96,7 +97,7 @@ public class GlobalExceptionHandler {
 
 
 
-    }*/
+    }
 
 
     }

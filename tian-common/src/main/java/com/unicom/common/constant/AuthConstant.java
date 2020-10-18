@@ -7,7 +7,7 @@ public interface AuthConstant {
   /**jwt存储权限属性*/
   String AUTHORITY_CLAIM_NAME="authorities";
   /**后台管理client_id*/
-  String ADMIN_CLIENT_ID="amdin-app";
+  String ADMIN_CLIENT_ID="admin-app";
   /**前台*/
   String PORTAL_CLIENT_ID="portal-app";
   /**后台管理接口路径匹配*/

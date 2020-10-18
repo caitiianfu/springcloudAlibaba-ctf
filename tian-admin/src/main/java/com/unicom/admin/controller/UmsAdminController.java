@@ -12,8 +12,11 @@ import com.unicom.common.domain.UserDto;
 import com.unicom.generator.entity.UmsAdmin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,8 +43,6 @@ public class UmsAdminController {
         @Autowired
         private UmsRoleResourceRelationServiceImpl umsRoleResourceRelationService;
 
-        @Value("${jwt.tokenHead}")
-        private String tokenHead;
 
         @ApiOperation(value = "测试分页")
         @RequestMapping(value = "/{current}/{size}", method = RequestMethod.GET)
@@ -78,6 +79,18 @@ public class UmsAdminController {
         @ApiOperation("登录获得token")
         @RequestMapping(value = "/login", method = RequestMethod.POST)
         public ResultUtils login(@RequestBody UmsAdminLoginVo umsAdminLoginVo) {
-                return iUmsAdminService.login(umsAdminLoginVo.getUsername(),umsAdminLoginVo.getPassword());
+//                Map m=new HashMap();
+//                m.put("111",11);
+//                return  m;
+                  return iUmsAdminService.login(umsAdminLoginVo.getUsername(),umsAdminLoginVo.getPassword());
+        }
+
+        public static void main(String[] args) {
+
+                String s=new BCryptPasswordEncoder().encode("123456");
+                String ori="$2a$10$9XYnYtclqAvFOd15fdgCPOCzl1BSyhVnHeUhhKnxEShjCS2ENIOvu";
+                PasswordEncoder p=new BCryptPasswordEncoder();
+                System.out.println(ori);
+                System.out.println(p.matches("123456",ori));
         }
 }

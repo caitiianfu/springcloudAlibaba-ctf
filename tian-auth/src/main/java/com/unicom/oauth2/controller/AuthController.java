@@ -10,11 +10,14 @@ import io.swagger.annotations.ApiOperation;
 import java.security.Principal;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -42,7 +45,7 @@ public class AuthController {
       @ApiImplicitParam(name = "username", value = "登录用户名"),
       @ApiImplicitParam(name = "password", value = "登录密码")
   })
-  public ResultUtils<Oauth2TokenDto> postAccessToken(Principal principal, Map<String, String> parameters)
+  public ResultUtils<Oauth2TokenDto> postAccessToken(Principal principal,@RequestParam Map<String, String> parameters)
       throws HttpRequestMethodNotSupportedException {
     OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
     Oauth2TokenDto oauth2TokenDto = Oauth2TokenDto.builder()

@@ -28,7 +28,7 @@ server:
 #  background-processor-delay: 30
 spring:
   application:
-    name: tidasd
+    name: tian-admin
   cloud:
     nacos:
       discovery:
