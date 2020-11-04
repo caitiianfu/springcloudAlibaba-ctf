@@ -3,6 +3,7 @@ package com.unicom.admin.component;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.json.JSONUtil;
+import com.unicom.admin.bo.WebLogErrorInfo;
 import com.unicom.admin.bo.WebLogInfo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -79,7 +80,41 @@ public class WebLogAspect {
                 log.info("Request info:  {}", JSONUtil.parse(webLog).toString());
                 return  result;
         }
-        public  static Object getParameter(Method method,Object[] args){
+        @AfterThrowing(pointcut = "webLog()",throwing = "e")
+        public void doAfterThrow(JoinPoint joinPoint, RuntimeException e) {
+          long startTime=System.currentTimeMillis();
+          ServletRequestAttributes attributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+          HttpServletRequest request=attributes.getRequest();
+          //记录请求信息（通过logstash传入elasticsearch）
+          WebLogErrorInfo webLogErrorInfo=new WebLogErrorInfo();
+          Signature signature=joinPoint.getSignature();
+          MethodSignature methodSignature=(MethodSignature) signature;
+          Method method=methodSignature.getMethod();
+          if (method.isAnnotationPresent(ApiOperation.class)){
+            ApiOperation log=method.getAnnotation(ApiOperation.class);
+            webLogErrorInfo.setDescription(log.value());
+          }
+          long endTime=System.currentTimeMillis();
+          String urlStr=request.getRequestURL().toString();
+          webLogErrorInfo.setUrl(urlStr);
+          webLogErrorInfo.setBasePath(StrUtil.removeSuffix(urlStr, URLUtil.url(urlStr).getPath()));
+          webLogErrorInfo.setIp(request.getRemoteUser());
+          webLogErrorInfo.setMethod(request.getMethod());
+          webLogErrorInfo.setParameter(getParameter(method,joinPoint.getArgs()));
+          webLogErrorInfo.setSpendTime((int)(endTime-startTime));
+          webLogErrorInfo.setStartTime(startTime);
+          webLogErrorInfo.setUri(request.getRequestURI());
+          webLogErrorInfo.setException(e);
+          Map<String,Object> logMap=new HashMap<>(5);
+          logMap.put("url",webLogErrorInfo.getUrl());
+          logMap.put("parameter",webLogErrorInfo.getParameter());
+          logMap.put("spendTime",webLogErrorInfo.getSpendTime());
+          logMap.put("description",webLogErrorInfo.getDescription());
+          logMap.put("method",webLogErrorInfo.getMethod());
+          log.info("ERROR Request info:  {}", JSONUtil.parse(webLogErrorInfo).toString());
+        }
+
+          public  static Object getParameter(Method method,Object[] args){
                 List<Object> argList=new ArrayList<>();
                 Parameter[] parameters=method.getParameters();
                 for (int i=0;i<parameters.length;i++){
