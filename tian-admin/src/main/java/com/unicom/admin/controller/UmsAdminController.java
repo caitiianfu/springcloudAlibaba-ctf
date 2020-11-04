@@ -8,11 +8,14 @@ import com.unicom.admin.dto.UmsAdminLoginVo;
 import com.unicom.admin.service.IUmsAdminService;
 import com.unicom.admin.service.impl.UmsRoleResourceRelationServiceImpl;
 import com.unicom.common.api.ResultUtils;
+import com.unicom.common.constant.TraceConstant;
 import com.unicom.common.domain.UserDto;
+import com.unicom.common.test.ThreadTestService;
 import com.unicom.generator.entity.UmsAdmin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,7 +45,8 @@ public class UmsAdminController {
         private IUmsAdminService iUmsAdminService;
         @Autowired
         private UmsRoleResourceRelationServiceImpl umsRoleResourceRelationService;
-
+        @Autowired
+        private ThreadTestService threadTestService;
 
         @ApiOperation(value = "测试分页")
         @RequestMapping(value = "/{current}/{size}", method = RequestMethod.GET)
@@ -78,11 +82,16 @@ public class UmsAdminController {
 
         @ApiOperation("登录获得token")
         @RequestMapping(value = "/login", method = RequestMethod.POST)
-        public ResultUtils login(@RequestBody UmsAdminLoginVo umsAdminLoginVo) {
+        public ResultUtils login(@RequestBody UmsAdminLoginVo umsAdminLoginVo, HttpServletRequest request) {
 //                Map m=new HashMap();
 //                m.put("111",11);
 //                return  m;
-                  return iUmsAdminService.login(umsAdminLoginVo.getUsername(),umsAdminLoginVo.getPassword());
+                try {
+                        threadTestService.sendMsg1();
+                } catch (InterruptedException e) {
+                        e.printStackTrace();
+                }
+                return iUmsAdminService.login(umsAdminLoginVo.getUsername(),umsAdminLoginVo.getPassword());
         }
 
         public static void main(String[] args) {

@@ -24,7 +24,7 @@ public class RequestStatsFilter implements GlobalFilter, Ordered {
 	@Override
 	public int getOrder() {
 		// TODO Auto-generated method stub
-		return -501;
+		return  -501;
 	}
 
 	@Override

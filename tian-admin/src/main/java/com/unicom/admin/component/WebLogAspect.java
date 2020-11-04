@@ -3,11 +3,9 @@ package com.unicom.admin.component;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.json.JSONUtil;
-import com.unicom.admin.bo.WebLog;
-import freemarker.template.utility.StringUtil;
+import com.unicom.admin.bo.WebLogInfo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import net.logstash.logback.marker.Markers;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -52,7 +50,7 @@ public class WebLogAspect {
             ServletRequestAttributes attributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request=attributes.getRequest();
             //记录请求信息（通过logstash传入elasticsearch）
-                WebLog webLog=new WebLog();
+                WebLogInfo webLog=new WebLogInfo();
                 Object result=joinPoint.proceed();
                 Signature signature=joinPoint.getSignature();
                 MethodSignature methodSignature=(MethodSignature) signature;
@@ -78,7 +76,7 @@ public class WebLogAspect {
                 logMap.put("spendTime",webLog.getSpendTime());
                 logMap.put("description",webLog.getDescription());
                 logMap.put("method",webLog.getMethod());
-                log.info(Markers.appendEntries(logMap), JSONUtil.parse(webLog).toString());
+                log.info("Request info:  {}", JSONUtil.parse(webLog).toString());
                 return  result;
         }
         public  static Object getParameter(Method method,Object[] args){

@@ -1,5 +1,6 @@
 package com.unicom.common.config;
 
+import com.unicom.common.interceptor.CustomThreadPoolTaskExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +37,9 @@ public class ThreadPoolTaskConfig {
 
   @Bean("taskExecutor")
   public ThreadPoolTaskExecutor taskExecutor() {
-    ThreadPoolTaskExecutor executor=new ThreadPoolTaskExecutor();
+   // ThreadPoolTaskExecutor executor=new ThreadPoolTaskExecutor();
+    //覆盖方法
+    ThreadPoolTaskExecutor executor=new CustomThreadPoolTaskExecutor();
     executor.setCorePoolSize(corePoolSize);
     executor.setMaxPoolSize(maxPoolSize);
     executor.setKeepAliveSeconds(keepAliveTime);

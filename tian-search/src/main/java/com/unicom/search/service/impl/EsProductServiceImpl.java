@@ -62,7 +62,9 @@ public class EsProductServiceImpl implements EsProductService {
   @Override
   public int importAll() {
     List<EsProduct> esProductList=esProductDao.getAllEsProductList(null);
-    Iterable<EsProduct> esProducts=esProductRepository.saveAll(esProductList);
+//    Iterable<EsProduct> esProducts=esProductRepository.saveAll(esProductList);
+    Iterable<EsProduct> esProducts=elasticsearchTemplate.save(esProductList);
+
     Iterator<EsProduct> iterator= esProducts.iterator();
     int count=0;
     while (iterator.hasNext()){
@@ -237,9 +239,9 @@ public class EsProductServiceImpl implements EsProductService {
       builder.withQuery(QueryBuilders.multiMatchQuery(keyword,"name","subTitle","keywords"));
     }
     //聚合搜索品牌名称
-    builder.addAggregation(AggregationBuilders.terms("brandNames").field("brandName"));
+      builder.addAggregation(AggregationBuilders.terms("brandNames").field("brandName"));
     //集合搜索分类名称
-    builder.addAggregation(AggregationBuilders.terms("productCategoryNames").field("productCategoryName"));
+      builder.addAggregation(AggregationBuilders.terms("productCategoryNames").field("productCategoryName"));
     //聚合搜索商品属性，去除type=1的属性
     AbstractAggregationBuilder aggregationBuilder = AggregationBuilders.nested("allAttrValues","attrValueList")
         .subAggregation(AggregationBuilders.filter("productAttrs",QueryBuilders.termQuery("attrValueList.type",1))

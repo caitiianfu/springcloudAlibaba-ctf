@@ -14,23 +14,20 @@
     <module>tian-admin</module>
     <module>tian-mbg</module>
 
-      <module>tian-common</module>
        <module>tian-gateway</module>
-       <module>tian-security</module>
-       <module>tian-gen</module>
-       <module>tian-admin</module>
-       <module>tian-mbg</module>
+<!--       <module>tian-security</module>-->
+<!--       <module>tian-gen</module>-->
        <module>tian-search</module>
-       <module>tian-mongo</module>
-       <module>tian-redis</module>
-       <module>tian-rabbitMQ</module>
-       <module>tian-activiti</module>
-       <module>tian-netty</module>
-       <module>tian-oauth2-redis</module>
-       <module>tian-oauth2-jwt</module>
-       <module>tian-sentinel</module>
+<!--       <module>tian-mongo</module>-->
+<!--       <module>tian-redis</module>-->
+<!--       <module>tian-rabbitMQ</module>-->
+<!--       <module>tian-activiti</module>-->
+<!--       <module>tian-netty</module>-->
+<!--       <module>tian-oauth2-redis</module>-->
+<!--       <module>tian-oauth2-jwt</module>-->
+<!--       <module>tian-sentinel</module>-->
 
-       <module>tian-rocketmq</module>
+<!--       <module>tian-rocketmq</module>-->
 <!--    <module>tian-seata</module>
 
     <module>tian-hadoop</module>

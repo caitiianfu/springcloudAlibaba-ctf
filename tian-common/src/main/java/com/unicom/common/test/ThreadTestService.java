@@ -8,6 +8,7 @@
 */
 package com.unicom.common.test;
 
+import com.unicom.common.domain.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -36,4 +37,6 @@ public class ThreadTestService {
 			Thread.sleep(2000);
 			logger.info("发送短信----------------2 执行结束");
 		}
+
+
 }

@@ -3,7 +3,7 @@ package com.unicom.admin.bo;
 import lombok.Data;
 
 @Data
-public class WebLog {
+public class WebLogInfo {
     /**
      * 操作描述
      */

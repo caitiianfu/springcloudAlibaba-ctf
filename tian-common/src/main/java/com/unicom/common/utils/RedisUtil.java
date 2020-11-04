@@ -1,5 +1,6 @@
 package com.unicom.common.utils;
 
+import com.unicom.common.domain.UserDto;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
