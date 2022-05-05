@@ -5,7 +5,7 @@
     <parent>
         <artifactId>tian-redis</artifactId>
         <groupId>com.unicom</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,14 +13,10 @@
 
 
     <dependencies>
-
-
-
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
-
 
     </dependencies>
 

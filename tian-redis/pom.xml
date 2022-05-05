@@ -4,25 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.unicom</groupId>
-        <artifactId>tian-redis</artifactId>
-        <version>1.0.1</version>
+        <artifactId>tian</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tian-redisson</artifactId>
+    <artifactId>tian-redis</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.1</version>
 
-    <dependencies>
-
-
-
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>3.11.5</version>
-        </dependency>
-
-
-    </dependencies>
-
+    <modules>
+        <module>tian-jedis</module>
+        <module>tian-redisson</module>
+        <module>tian-redistemplate</module>
+    </modules>
 </project>
 
